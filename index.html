@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>É IUUUUUUUUUUUU PIXXXXXXXX</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin:0;
+    font-family:'Press Start 2P', monospace;
+    background: linear-gradient(120deg,#0b0f1a,#1a1f30);
+    overflow:hidden;
+    color:white;
+    display:flex; align-items:center; justify-content:center; height:100vh;
+  }
+
+  .card{
+    background:#0e1324;
+    border-radius:16px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(0,255,255,0.4);
+    position:relative;
+    cursor:pointer;
+  }
+
+  h1{
+    color:#06b6d4;
+    text-shadow:0 0 10px #06b6d4;
+    animation:pulse 1s infinite alternate;
+    margin:0 0 20px 0;
+  }
+
+  @keyframes pulse{
+    from{text-shadow:0 0 10px #06b6d4;}
+    to{text-shadow:0 0 30px #00ffff;}
+  }
+
+  img{
+    width:220px;
+    border-radius:12px;
+    animation:bounce 2s infinite;
+    transition:transform 0.3s;
+  }
+
+  @keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+  }
+
+  button{
+    margin-top:15px;
+    padding:12px 20px;
+    background:#06b6d4;
+    color:#021027;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:14px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+  }
+
+  button:hover{
+    transform:scale(1.2) rotate(-5deg);
+    box-shadow:0 0 30px #00ffff;
+  }
+
+  code{
+    display:block;
+    margin:15px auto;
+    background:#071126;
+    padding:10px;
+    border-radius:6px;
+    word-break:break-all;
+    font-size:10px;
+  }
+
+  #confetti{position:absolute;width:100%;height:100%;pointer-events:none;overflow:hidden;}
+  .particle{position:absolute;width:10px;height:10px;border-radius:50%;opacity:0.9;animation:fall 2s linear infinite;}
+  @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
+
+  #texts{
+    position:absolute;
+    top:10px;
+    width:100%;
+    text-align:center;
+    font-size:16px;
+    animation:blink 1s infinite alternate;
+  }
+
+  @keyframes blink{
+    from{opacity:1;}
+    to{opacity:0.6;}
+  }
+
+</style>
+</head>
+<body>
+<div id="texts">ME PAGA AÍ 😏!</div>
+<div class="card" id="card">
+  <h1> PIX</h1>
+  <img src="qrcode/qrcodeeeeeeeee.png" alt="qrcodeeeeeeeee" id="qr"/>
+  <code id="copiacolacode"></code>
+  <button id="btn">Abrir QR em tamanho real / clique</button>
+  <p>Pagamentos: <span id="counter">0</span></p>
+</div>
+<div id="confetti"></div>
+
+<audio id="popSound" src="sons/me-paga-meu-dinheiro-disgraca.mp3"></audio>
+
+<script>
+const btn = document.getElementById('btn');
+const qr = document.getElementById('qr');
+const confetti = document.getElementById('confetti');
+const counter = document.getElementById('counter');
+const cha = document.getElementById('chaChing');
+const pop = document.getElementById('popSound');
+
+let count = 0;
+
+function launchConfetti(){
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random()*window.innerWidth+'px';
+    p.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    confetti.appendChild(p);
+    setTimeout(()=>p.remove(),2000);
+  }
+}
+
+function playSound(sound){ sound.currentTime=0; sound.play(); }
+
+function addCount(){
+  count++;
+  counter.innerText = count;
+}
+
+btn.addEventListener('click', ()=>{
+  window.open('qrcode/qrcodeeeeeeeee.png ', 'blank');
+  launchConfetti();
+  playSound(pop);
+  addCount();
+});
+
+qr.addEventListener('click', ()=>{
+  launchConfetti();
+  playSound(cha);
+  addCount();
+});
+</script>
+</body>
+</html>
